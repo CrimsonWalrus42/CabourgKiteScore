@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="300">
+    <title>Kitesurfability Assessment Report - Cabourg</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #ffffff;
+            color: #1d1d1f;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 30px 20px 20px;
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            color: #1a1a1a;
+        }
+
+        h1 {
+            font-size: 2.4em;
+            font-weight: 700;
+            letter-spacing: -1.2px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #666666;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .report-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 0.75em;
+            color: #000000;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .meta-value {
+            font-size: 0.9em;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        /* Kitesurfing Illustration */
+        .kitesurfing-illustration {
+            margin: 12px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 140px;
+            background: white;
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .kite-surfer-svg {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        /* Criteria Box */
+        .criteria-box {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid #2d2d2d;
+        }
+
+        .criteria-box h2 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .criteria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .criteria-item {
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .criteria-item-label {
+            font-size: 0.75em;
+            color: #666666;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .criteria-item-value {
+            font-size: 0.9em;
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        /* Summary Table */
+        .summary-section h2 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .summary-table th {
+            background: #2d2d2d;
+            color: white;
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e5e5e5;
+            color: #1a1a1a;
+        }
+
+        .summary-table tr.good-day {
+            background: #f0f8f0;
+        }
+
+        .summary-table tr.bad-day {
+            background: #f8f0f0;
+        }
+
+        .summary-table tr.medium-day {
+            background: #fff5f0;
+        }
+
+        .summary-table tr.best-day {
+            background: #f0f8f0;
+        }
+
+        .summary-table tr.workable-day {
+            background: #fff5f0;
+        }
+
+        .summary-table tr.avoid-day {
+            background: #f8f0f0;
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .summary-table tr:hover {
+            background: #f5f5f7;
+        }
+
+        #weekly-overview-table tbody tr[data-day-idx] {
+            cursor: pointer;
+        }
+
+        #weekly-overview-table tbody tr[data-day-idx]:hover td:first-child {
+            text-decoration: underline;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.yes {
+            background: #34c759;
+            color: white;
+        }
+
+        .status-badge.no {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .status-badge.medium {
+            background: #ff9500;
+            color: white;
+        }
+
+        .status-badge.best {
+            background: #34c759;
+            color: white;
+        }
+
+        .status-badge.workable {
+            background: #ff9500;
+            color: white;
+        }
+
+        .status-badge.avoid {
+            background: #ff3b30;
+            color: white;
+        }
+
+        /* Day Sections */
+        .day-section {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid #d0d0d0;
+        }
+
+        .day-section.good {
+            border-left-color: #34c759;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8f0 100%);
+        }
+
+        .day-section.bad {
+            border-left-color: #ff3b30;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f0f0 100%);
+        }
+
+        .day-section.medium {
+            border-left-color: #ff9500;
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f0 100%);
+        }
+
+        .day-section.best {
+            border-left-color: #34c759;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8f0 100%);
+        }
+
+        .day-section.workable {
+            border-left-color: #ff9500;
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f0 100%);
+        }
+
+        .day-section.risky {
+            border-left-color: #ff6b6b;
+            background: linear-gradient(135deg, #ffffff 0%, #ffe5e5 100%);
+        }
+
+        .day-section.avoid {
+            border-left-color: #ff3b30;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f0f0 100%);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .day-header h2 {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .day-status {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2em;
+            letter-spacing: 0.5px;
+        }
+
+        .day-status.yes {
+            background: #34c759;
+            color: white;
+        }
+
+        .day-status.no {
+            background: #ff3b30;
+            color: white;
+        }
+
+        .day-status.medium {
+            background: #ff9500;
+            color: white;
+        }
+
+        .day-status.best {
+            background: #34c759;
+            color: white;
+        }
+
+        .day-status.workable {
+            background: #ff9500;
+            color: white;
+        }
+
+        .day-status.risky {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .day-status.avoid {
+            background: #ff3b30;
+            color: white;
+        }
+
+        /* Wind Direction Arrow */
+        .wind-direction-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 12px 0;
+            gap: 20px;
+        }
+
+        .wind-direction-visual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .arrow-indicator {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 600;
+            color: #1a1a1a;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .wind-info {
+            margin-top: 12px;
+        }
+
+        .wind-direction-name {
+            font-size: 1em;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .wind-degrees {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+
+        .compass-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+            font-size: 0.8em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 6px;
+        }
+
+        .legend-color.green {
+            background: #34c759;
+        }
+
+        .legend-color.red {
+            background: #ff3b30;
+        }
+
+        /* Details Table */
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.85em;
+        }
+
+        .details-table th {
+            background: #f5f5f5;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+            color: #666666;
+            border-bottom: 2px solid #d0d0d0;
+        }
+
+        .details-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #e5e5e5;
+            color: #1a1a1a;
+        }
+
+        .details-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .details-table tr:hover td {
+            background: #f5f5f7;
+        }
+
+        /* Rating and Notes */
+        .day-footer {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e5e5e5;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .rating-box {
+            padding: 10px;
+            background: #f8f8f8;
+            border-radius: 12px;
+            font-size: 0.85em;
+            border: 1px solid #e0e0e0;
+        }
+
+        .rating-label {
+            font-size: 0.75em;
+            color: #666666;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .rating-value {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .notes-box {
+            padding: 10px;
+            background: #f8f8f8;
+            border-radius: 12px;
+            font-size: 0.85em;
+            border: 1px solid #e0e0e0;
+        }
+
+        .notes-label {
+            font-size: 0.75em;
+            color: #666666;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .notes-content {
+            font-size: 0.9em;
+            color: #1a1a1a;
+            line-height: 1.4;
+        }
+
+        /* Summary Box */
+        .summary-footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .summary-footer h2 {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .summary-item h3 {
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .summary-item p {
+            font-size: 0.95em;
+            line-height: 1.4;
+            color: white;
+        }
+
+        .recommendations {
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .recommendations h3 {
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            font-size: 0.9em;
+        }
+
+        .recommendations li {
+            margin: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .recommendations li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #34c759;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666666;
+            font-size: 0.8em;
+            border-top: 1px solid #e5e5e5;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 0.95em;
+            }
+
+            .kitesurfing-illustration {
+                height: 100px;
+                margin: 10px 0;
+            }
+
+            .kite-surfer-svg {
+                max-width: 150px;
+            }
+
+            .report-meta {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .day-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .day-footer {
+                grid-template-columns: 1fr;
+            }
+
+            .compass {
+                width: 220px;
+                height: 220px;
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+
+            .criteria-box,
+            .day-section,
+            .summary-footer {
+                padding: 25px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Cabourg Kitesurfing<br>Weather Score</h1>
+            <p style="font-size: 1em; color: #666666; font-weight: 500; margin: 15px 0 30px 0;">7-Day Forecast for Cabourg Beach, France</p>
+            
+            <!-- Report Meta -->
+            <div class="report-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Report Date</div>
+                    <div class="meta-value">March 15, 2026</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Forecast Period</div>
+                    <div class="meta-value">7 Days Ahead</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Current Conditions -->
+        <div class="summary-section">
+            <h2>Current Conditions (Live Data)</h2>
+            <p style="font-size: 0.9em; color: #666666; margin-bottom: 12px;">Last updated: <span id="current-time-index">March 15, 2026 at 08:04 CET</span> • Data from Houlgate weather station</p>
+            <table id="cond-table" class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Date</th>
+                        <th>Assessment</th>
+                        <th>Wind</th>
+                        <th>High Tide</th>
+                        <th>Low Tide</th>
+                        <th>Air Temp</th>
+                        <th>Water Temp</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="workable-day">
+                        <td><strong>Today</strong></td>
+                        <td>March 15</td>
+                        <td><span class="status-badge workable">~</span></td>
+                        <td style="text-align: center; font-weight: 600;"><div style="display: flex; align-items: center; justify-content: center; gap: 4px;"><span style="display: inline-block; transform: rotate(90deg); font-size: 1.1em;">↑</span> <span>7–10 kts</span></div></td>
+                        <td>08:12 / 20:42</td>
+                        <td>02:48 / 15:16</td>
+                        <td style="text-align: center;">7°C</td>
+                        <td style="text-align: center;">8°C</td>
+                        <td>8/10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Webcams -->
+        <div class="summary-section">
+            <h2>Live Beach Views</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                <div>
+                    <h3 style="font-size: 0.95em; margin-bottom: 8px; color: #333;">Cabourg Beach</h3>
+                    <iframe src="https://www.vision-environnement.com/live/player/cabourg20.php" width="100%" height="360" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);"></iframe>
+                </div>
+                <div>
+                    <h3 style="font-size: 0.95em; margin-bottom: 8px; color: #333;">Houlgate Beach</h3>
+                    <iframe src="https://www.vision-environnement.com/live/player/houlgate0.php" width="100%" height="360" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" style="border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Table -->
+        <div class="summary-section">
+            <h2>Weekly Overview</h2>
+            <p style="font-size: 0.9em; color: #666666; margin-bottom: 12px;">Last updated: <span id="weekly-time-index">March 15, 2026 at 08:04 CET</span> • 7-day forecast</p>
+            <table id="weekly-overview-table" class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Date</th>
+                        <th>Assessment</th>
+                        <th>Wind</th>
+                        <th>High Tide</th>
+                        <th>Low Tide</th>
+                        <th>Air Temp</th>
+                        <th>Water Temp</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="workable-day">
+                        <td><strong>Sunday</strong></td>
+                        <td>March 15</td>
+                        <td><span class="status-badge workable">~</span></td>
+                        <td style="text-align: center; font-weight: 600;"><div style="display: flex; align-items: center; justify-content: center; gap: 4px;"><span style="display: inline-block; transform: rotate(225deg); font-size: 1.1em;">↑</span> <span>9–12 kts</span></div></td>
+                        <td>08:12 / 20:42</td>
+                        <td>02:48 / 15:16</td>
+                        <td style="text-align: center;">7°C</td>
+                        <td style="text-align: center;">8°C</td>
+                        <td>8/10</td>
+                    </tr>
+                    <tr class="workable-day">
+                        <td><strong>Monday</strong></td>
+                        <td>March 16</td>
+                        <td><span class="status-badge workable">~</span></td>
+                        <td style="text-align: center; font-weight: 600;"><div style="display: flex; align-items: center; justify-content: center; gap: 4px;"><span style="display: inline-block; transform: rotate(160deg); font-size: 1.1em;">↑</span> <span>11–15 kts</span></div></td>
+                        <td>09:02 / 21:32</td>
+                        <td>03:38 / 16:06</td>
+                        <td style="text-align: center;">8°C</td>
+                        <td style="text-align: center;">8°C</td>
+                        <td>5/10</td>
+                    </tr>
+                    <tr class="workable-day">
+                        <td><strong>Tuesday</strong></td>
+                        <td>March 17</td>
+                        <td><span class="status-badge workable">~</span></td>
+                        <td style="text-align: center; font-weight: 600;"><div style="display: flex; align-items: center; justify-content: center; gap: 4px;"><span style="display: inline-block; transform: rotate(90deg); font-size: 1.1em;">↑</span> <span>6–9 kts</span></div></td>
+                        <td>09:52 / 22:22</td>
+                        <td>04:28 / 16:56</td>
+                        <td style="text-align: center;">9°C</td>
+                        <td style="text-align: center;">8°C</td>
+                        <td>5/10</td>
+                    </tr>
+                    <tr class="workable-day">
+                        <td><strong>Wednesday</strong></td>
+                        <td>March 18</td>
+                        <td><span class="status-badge workable">~</span></td>
+                        <td style="text-align: center; font-weight: 600;"><div style="display: flex; align-items: center; justify-content: center; gap: 4px;"><span style="display: inline-block; transform: rotate(270deg); font-size: 1.1em;">↑</span> <span>10–14 kts</span></div></td>
+                        <td>10:42 / 23:12</td>
+                        <td>05:18 / 17:46</td>
+                        <td style="text-align: center;">10°C</td>
+                        <td style="text-align: center;">8°C</td>
+                        <td>5/10</td>
+                    </tr>
+                    <tr class="workable-day">
+                        <td><strong>Thursday</strong></td>
+                        <td>March 19</td>
+                        <td><span class="status-badge workable">~</span></td>
+                        <td style="text-align: center; font-weight: 600;"><div style="display: flex; align-items: center; justify-content: center; gap: 4px;"><span style="display: inline-block; transform: rotate(135deg); font-size: 1.1em;">↑</span> <span>7–13 kts</span></div></td>
+                        <td>11:32 / 00:02</td>
+                        <td>06:08 / 18:36</td>
+                        <td style="text-align: center;">11°C</td>
+                        <td style="text-align: center;">9°C</td>
+                        <td>5/10</td>
+                    </tr>
+                    <tr class="workable-day">
+                        <td><strong>Friday</strong></td>
+                        <td>March 20</td>
+                        <td><span class="status-badge workable">~</span></td>
+                        <td style="text-align: center; font-weight: 600;"><div style="display: flex; align-items: center; justify-content: center; gap: 4px;"><span style="display: inline-block; transform: rotate(225deg); font-size: 1.1em;">↑</span> <span>5–8 kts</span></div></td>
+                        <td>11:15 / 23:35</td>
+                        <td>05:05 / 17:25</td>
+                        <td style="text-align: center;">12°C</td>
+                        <td style="text-align: center;">9°C</td>
+                        <td>6/10</td>
+                    </tr>
+                    <tr class="best-day">
+                        <td><strong>Saturday</strong></td>
+                        <td>March 21</td>
+                        <td><span class="status-badge best">✓</span></td>
+                        <td style="text-align: center; font-weight: 600;"><div style="display: flex; align-items: center; justify-content: center; gap: 4px;"><span style="display: inline-block; transform: rotate(180deg); font-size: 1.1em;">↑</span> <span>12–19 kts</span></div></td>
+                        <td>13:12 / 01:42</td>
+                        <td>07:48 / 20:16</td>
+                        <td style="text-align: center;">11°C</td>
+                        <td style="text-align: center;">9°C</td>
+                        <td>9/10</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Day Sections -->
+        <!-- Summary -->
+        <div class="summary-footer">
+            <h2>Weekly Summary & Recommendations</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <h3>Best/Safest ✓</h3>
+                    <p>Saturday 21st (N), Friday 20th (NE) – best conditions. Saturday is pure onshore, Friday is sideshore. Both have good wind and no rain.</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Still Workable ~</h3>
+                    <p>Sunday 15th (NE), Monday 16th (NNW), Tuesday 17th (W), Wednesday 18th (E), Thursday 19th (NW) – Onshore/Sideshore. Safe directions.</p>
+                </div>
+                <div class="summary-item">
+                    <h3>Avoid ✗</h3>
+                    <p>No days to avoid this week — all directions are safe.</p>
+                </div>
+            </div>
+            <div class="recommendations">
+                <h3>Key Recommendations</h3>
+                <ul>
+                    <li><strong>All 7 days are kitesurfable</strong> – every day has a safe wind direction this week.</li>
+                    <li><strong>Best day</strong>: Saturday 21st (N, pure onshore) – ideal direction, good speed (12–19 kts), no rain.</li>
+                    <li><strong>Also excellent</strong>: Friday 20th (NE, sideshore) – clean conditions, no rain, fine direction.</li>
+                    <li><strong>Workable days</strong> (onshore/sideshore): Sunday (NE), Monday (NNW, rain pm), Tuesday (W), Wednesday (E), Thursday (NW) – all safe directions.</li>
+                    <li>Wind speed range: 12–40 knots acceptable. The key factor is direction: N winds are onshore (safe), S winds are offshore (dangerous).</li>
+                    <li>Simple rule: N winds = best (onshore, sea to land). E/W winds = good (sideshore). S winds = dangerous (offshore, land to sea).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sunday -->
+        <div class="day-section workable" id="day-0" data-day-idx="0">
+            <div class="day-header">
+                <h2>Sunday, March 15</h2>
+                <span class="day-status workable">~</span>
+            </div>
+
+            <table class="details-table">
+                <tr><th>Parameter</th><th>Details</th></tr>
+                <tr><td>Wind Speed</td><td>9–12 knots</td></tr>
+                <tr><td>Wind Direction</td><td><span style="display: inline-block; transform: rotate(225deg); font-size: 1.1em; margin-right: 4px;">↑</span> NE (45°)</td></tr>
+                <tr><td>High Tide</td><td>08:12 / 20:42</td></tr>
+                <tr><td>Low Tide</td><td>02:48 / 15:16</td></tr>
+                <tr><td>Air Temperature</td><td>7°C</td></tr>
+                <tr><td>Water Temperature</td><td>8°C</td></tr>
+                <tr><td>Precipitation</td><td>None</td></tr>
+            </table>
+
+            <div class="day-footer">
+                <div class="rating-box">
+                    <div class="rating-label">Rating</div>
+                    <div class="rating-value">7/10 – Still Workable</div>
+                </div>
+                <div class="notes-box">
+                    <div class="notes-label">Notes</div>
+                    <div class="notes-content">Sideshore wind (45° NE within 060°-100° range). Parallel to beach with good wind speed. Standard conditions for Cabourg.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monday -->
+        <div class="day-section workable" id="day-1" data-day-idx="1">
+            <div class="day-header">
+                <h2>Monday, March 16</h2>
+                <span class="day-status workable">~</span>
+            </div>
+
+            <table class="details-table">
+                <tr><th>Parameter</th><th>Details</th></tr>
+                <tr><td>Wind Speed</td><td>11–15 knots</td></tr>
+                <tr><td>Wind Direction</td><td><span style="display: inline-block; transform: rotate(160deg); font-size: 1.1em; margin-right: 4px;">↑</span> NNW (340°)</td></tr>
+                <tr><td>High Tide</td><td>09:02 / 21:32</td></tr>
+                <tr><td>Low Tide</td><td>03:38 / 16:06</td></tr>
+                <tr><td>Air Temperature</td><td>8°C</td></tr>
+                <tr><td>Water Temperature</td><td>8°C</td></tr>
+                <tr><td>Precipitation</td><td>Light rain 15:00–17:00</td></tr>
+            </table>
+
+            <div class="day-footer">
+                <div class="rating-box">
+                    <div class="rating-label">Rating</div>
+                    <div class="rating-value">5/10 – Workable</div>
+                </div>
+                <div class="notes-box">
+                    <div class="notes-label">Notes</div>
+                    <div class="notes-content">Onshore wind: 340° NNW is within the onshore sector (330°–030°, sea to land). Safe direction – wind pushes riders toward shore. Good speed (11–15 kts). Reduced by light rain 15:00–17:00; morning/midday session recommended.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tuesday -->
+        <div class="day-section workable" id="day-2" data-day-idx="2">
+            <div class="day-header">
+                <h2>Tuesday, March 17</h2>
+                <span class="day-status workable">~</span>
+            </div>
+
+            <table class="details-table">
+                <tr><th>Parameter</th><th>Details</th></tr>
+                <tr><td>Wind Speed</td><td>6–9 knots</td></tr>
+                <tr><td>Wind Direction</td><td><span style="display: inline-block; transform: rotate(90deg); font-size: 1.1em; margin-right: 4px;">↑</span> W (270°)</td></tr>
+                <tr><td>High Tide</td><td>09:52 / 22:22</td></tr>
+                <tr><td>Low Tide</td><td>04:28 / 16:56</td></tr>
+                <tr><td>Air Temperature</td><td>9°C</td></tr>
+                <tr><td>Water Temperature</td><td>8°C</td></tr>
+                <tr><td>Precipitation</td><td>Moderate rain all day</td></tr>
+            </table>
+
+            <div class="day-footer">
+                <div class="rating-box">
+                    <div class="rating-label">Rating</div>
+                    <div class="rating-value">5/10 – Still Workable</div>
+                </div>
+                <div class="notes-box">
+                    <div class="notes-label">Notes</div>
+                    <div class="notes-content">Sideshore conditions (270° W within 260°-300° range). Parallel to beach, workable but with poor visibility from moderate rain all day.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wednesday -->
+        <div class="day-section workable" id="day-3" data-day-idx="3">
+            <div class="day-header">
+                <h2>Wednesday, March 18</h2>
+                <span class="day-status workable">~</span>
+            </div>
+
+            <table class="details-table">
+                <tr><th>Parameter</th><th>Details</th></tr>
+                <tr><td>Wind Speed</td><td>10–14 knots</td></tr>
+                <tr><td>Wind Direction</td><td><span style="display: inline-block; transform: rotate(270deg); font-size: 1.1em; margin-right: 4px;">↑</span> E (90°)</td></tr>
+                <tr><td>High Tide</td><td>10:42 / 23:12</td></tr>
+                <tr><td>Low Tide</td><td>05:18 / 17:46</td></tr>
+                <tr><td>Air Temperature</td><td>10°C</td></tr>
+                <tr><td>Water Temperature</td><td>8°C</td></tr>
+                <tr><td>Precipitation</td><td>Light showers early morning</td></tr>
+            </table>
+
+            <div class="day-footer">
+                <div class="rating-box">
+                    <div class="rating-label">Rating</div>
+                    <div class="rating-value">5/10 – Still Workable</div>
+                </div>
+                <div class="notes-box">
+                    <div class="notes-label">Notes</div>
+                    <div class="notes-content">Sideshore (90° E at boundary of 060°-100° range). Parallel to beach. Light showers early morning but improving by afternoon – good window mid-morning to early afternoon.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thursday -->
+        <div class="day-section workable" id="day-4" data-day-idx="4">
+            <div class="day-header">
+                <h2>Thursday, March 19</h2>
+                <span class="day-status workable">~</span>
+            </div>
+
+            <table class="details-table">
+                <tr><th>Parameter</th><th>Details</th></tr>
+                <tr><td>Wind Speed</td><td>7–13 knots</td></tr>
+                <tr><td>Wind Direction</td><td><span style="display: inline-block; transform: rotate(135deg); font-size: 1.1em; margin-right: 4px;">↑</span> NW (315°)</td></tr>
+                <tr><td>High Tide</td><td>11:32 / 00:02</td></tr>
+                <tr><td>Low Tide</td><td>06:08 / 18:36</td></tr>
+                <tr><td>Air Temperature</td><td>11°C</td></tr>
+                <tr><td>Water Temperature</td><td>9°C</td></tr>
+                <tr><td>Precipitation</td><td>None</td></tr>
+            </table>
+
+            <div class="day-footer">
+                <div class="rating-box">
+                    <div class="rating-label">Rating</div>
+                    <div class="rating-value">5/10 – Still Workable</div>
+                </div>
+                <div class="notes-box">
+                    <div class="notes-label">Notes</div>
+                    <div class="notes-content">Sideshore conditions: 315° NW is within sideshore range (210°-330°). Wind blows parallel/from sea. Safe and enjoyable with no rain, though not the ideal onshore orientation. Solid session day.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Friday -->
+        <div class="day-section avoid" id="day-5" data-day-idx="5">
+            <div class="day-header">
+                <h2>Friday, March 20</h2>
+                <span class="day-status avoid">✗</span>
+            </div>
+
+            <table class="details-table">
+                <tr><th>Parameter</th><th>Details</th></tr>
+                <tr><td>Wind Speed</td><td>5–8 knots</td></tr>
+                <tr><td>Wind Direction</td><td><span style="display: inline-block; transform: rotate(225deg); font-size: 1.1em; margin-right: 4px;">↑</span> NE (45°)</td></tr>
+                <tr><td>High Tide</td><td>11:15 / 23:35</td></tr>
+                <tr><td>Low Tide</td><td>05:05 / 17:25</td></tr>
+                <tr><td>Air Temperature</td><td>12°C</td></tr>
+                <tr><td>Water Temperature</td><td>9°C</td></tr>
+                <tr><td>Precipitation</td><td>None</td></tr>
+            </table>
+
+            <div class="day-footer">
+                <div class="rating-box">
+                    <div class="rating-label">Rating</div>
+                    <div class="rating-value">2/10 – Avoid</div>
+                </div>
+                <div class="notes-box">
+                    <div class="notes-label">Notes</div>
+                    <div class="notes-content">Insufficient wind: 5–8 kts is well below the 12 kt minimum needed for kitesurfing. Direction (NE, 45°) is sideshore and safe, but there simply isn’t enough wind power. Not a kiting day.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saturday -->
+        <div class="day-section best" id="day-6" data-day-idx="6">
+            <div class="day-header">
+                <h2>Saturday, March 21</h2>
+                <span class="day-status best">✓</span>
+            </div>
+
+            <table class="details-table">
+                <tr><th>Parameter</th><th>Details</th></tr>
+                <tr><td>Wind Speed</td><td>12–19 knots</td></tr>
+                <tr><td>Wind Direction</td><td><span style="display: inline-block; transform: rotate(180deg); font-size: 1.1em; margin-right: 4px;">↑</span> N (0°)</td></tr>
+                <tr><td>High Tide</td><td>13:12 / 01:42</td></tr>
+                <tr><td>Low Tide</td><td>07:48 / 20:16</td></tr>
+                <tr><td>Air Temperature</td><td>11°C</td></tr>
+                <tr><td>Water Temperature</td><td>9°C</td></tr>
+                <tr><td>Precipitation</td><td>None</td></tr>
+            </table>
+
+            <div class="day-footer">
+                <div class="rating-box">
+                    <div class="rating-label">Rating</div>
+                    <div class="rating-value">9/10 – Best/Safest</div>
+                </div>
+                <div class="notes-box">
+                    <div class="notes-label">Notes</div>
+                    <div class="notes-content">Perfect onshore conditions: 0° N is pure onshore for Cabourg (beach faces north, sea to the north). Wind comes from the sea and blows toward land – riders are pushed toward shore. Ideal direction. Good speed (12–19 kts) and no rain. Best day of the week.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conditions Reference -->
+        <div class="criteria-box">
+            <h2>Conditions for Kitesurfing at Cabourg</h2>
+            <p style="font-size: 0.9em; color: #666666; margin-bottom: 15px;">Beach faces north (0°). Wind direction = where wind comes FROM. The critical factor: Onshore (N winds) = safest. Sideshore (E/W winds) = workable. Offshore (S winds) = dangerous!</p>
+            <div class="criteria-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="criteria-item">
+                    <div class="criteria-item-label">Wind Speed</div>
+                    <div class="criteria-item-value">12–40 knots</div>
+                </div>
+                <div class="criteria-item">
+                    <div class="criteria-item-label">Tide Window</div>
+                    <div class="criteria-item-value">Low to Medium</div>
+                </div>
+                <div class="criteria-item">
+                    <div class="criteria-item-label">Air Temperature</div>
+                    <div class="criteria-item-value">7–12°C</div>
+                </div>
+                <div class="criteria-item">
+                    <div class="criteria-item-label">Water Temperature</div>
+                    <div class="criteria-item-value">8–9°C</div>
+                </div>
+                <div class="criteria-item" style="grid-column: 1 / -1;">
+                    <div class="criteria-item-label">Wind Direction Reference</div>
+                    <div style="padding: 12px 0;">
+                        <div style="margin-bottom: 10px;"><strong>330°–030° (NNW → N → NNE):</strong> Pure Onshore – Wind from sea to land (Best/Safest)</div>
+                        <div style="margin-bottom: 10px;"><strong>030°–150° and 210°–330°:</strong> Sideshore – Wind parallel to beach (Good/Workable)</div>
+                        <div><strong>150°–210° (SSE → S → SSW):</strong> Pure Offshore – Wind from land to sea (Avoid – Dangerous)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Kitesurfability Assessment Report for Cabourg • Generated March 15, 2026</p>
+            <p>Wind: 12–40 knots • Tide: Low to Medium • Air: 7–12°C • Water: 8–9°C</p>
+        </footer>
+
+        <!-- Sources -->
+        <div style="background-color: #f5f5f5; border-top: 1px solid #ddd; padding: 20px; margin-top: 30px; font-size: 0.85em; color: #777;">
+            <p style="margin: 0; font-weight: 600; margin-bottom: 8px;">Data Sources</p>
+            <p style="margin: 4px 0;"><strong>Weather Forecast:</strong> <a href="https://open-meteo.com" style="color: #0066cc; text-decoration: none;">Open-Meteo (Live API)</a></p>
+            <p style="margin: 4px 0;"><strong>Tide Times:</strong> <a href="https://www.normandie-cabourg-paysdauge-tourisme.fr/sorganiser/marees/marees-cabourg/" style="color: #0066cc; text-decoration: none;">Normandie Cabourg Pays d'Auge Tourism - Tide Schedules</a></p>
+            <p style="margin: 4px 0;"><strong>Live Beach Webcams:</strong> <a href="https://www.vision-environnement.com/live/player/cabourg20.php" style="color: #0066cc; text-decoration: none;">Cabourg</a> • <a href="https://www.vision-environnement.com/live/player/houlgate0.php" style="color: #0066cc; text-decoration: none;">Houlgate</a></p>
+        </div>
+    </div>
+    <script>
+        const LAT = 49.3, LON = -0.082;
+        const WIND_MIN = 12, WIND_MAX = 40; // knots
+
+        // ── Assessment (Cabourg faces north: N wind = onshore/safe, S wind = offshore/dangerous) ──
+        function assess(kts, deg) {
+            if (kts < WIND_MIN || kts > WIND_MAX) return 'avoid';
+            if (deg > 150 && deg < 210) return 'avoid';  // S sector: offshore
+            if (deg >= 330 || deg <= 30)  return 'best';  // N sector: onshore
+            return 'workable';
+        }
+
+        function rateDay(kts, deg) {
+            const a = assess(kts, deg);
+            if (a === 'avoid') return 2;
+            const mid = kts >= 15 && kts <= 30;
+            return a === 'best' ? (mid ? 9 : 8) : (mid ? 7 : 6);
+        }
+
+        function windHTML(kts, deg) {
+            const rot = (deg + 180) % 360, s = Math.round(kts);
+            return `<div style="display:flex;align-items:center;justify-content:center;gap:4px;font-weight:600;"><span style="display:inline-block;transform:rotate(${rot}deg);font-size:1.1em;">↑</span> <span>${s}–${s + 3} kts</span></div>`;
+        }
+
+        function compassDir(deg) {
+            return ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(deg / 22.5) % 16];
+        }
+
+        function pad(n) { return String(n).padStart(2, '0'); }
+
+        // ── Timestamps ──────────────────────────────────────────────────────
+        function updateTimestamps() {
+            const now = new Date();
+            const p = {};
+            new Intl.DateTimeFormat('en-US', {
+                year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris', hour12: false
+            }).formatToParts(now).forEach(x => { p[x.type] = x.value; });
+            const ts = `${p.month} ${p.day}, ${p.year} at ${p.hour}:${p.minute} CET`;
+            ['current-time-index', 'weekly-time-index'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = ts;
+            });
+        }
+
+        // ── Weather — Open-Meteo (free, no auth required) ─────────────────────
+        async function fetchWeatherData() {
+            try {
+                const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}` +
+                    `&hourly=wind_speed_10m,wind_direction_10m,temperature_2m` +
+                    `&daily=wind_speed_10m_max,wind_direction_10m_dominant,temperature_2m_max` +
+                    `&timezone=Europe/Paris&wind_speed_unit=kn`;
+                const { hourly, daily } = await (await fetch(url)).json();
+                if (hourly && daily) {
+                    updateCurrentConditions(hourly);
+                    updateWeeklyForecast(daily);
+                    updateDaySections(daily);
+                    fetchTideData();
+                }
+            } catch (e) { console.warn('Weather API error:', e); }
+        }
+
+        function updateCurrentConditions(hourly) {
+            const now = new Date();
+            // Match current Paris time against Open-Meteo's hourly.time array (Paris tz)
+            const nowStr = now.toLocaleString('sv-SE', { timeZone: 'Europe/Paris' }).slice(0, 13).replace(' ', 'T');
+            let idx = (hourly.time || []).findIndex(t => t.startsWith(nowStr));
+            if (idx < 0) idx = 0;
+
+            const kts = Math.round(hourly.wind_speed_10m[idx] || 0);
+            const deg = hourly.wind_direction_10m[idx] || 0;
+            const tmp = Math.round(hourly.temperature_2m[idx] || 0);
+            const a   = assess(kts, deg);
+            const r   = rateDay(kts, deg);
+
+            const row = document.querySelector('#cond-table tbody tr');
+            if (!row) return;
+            row.className = a + '-day';
+
+            const badge = row.querySelector('td:nth-child(3) .status-badge');
+            if (badge) { badge.className = 'status-badge ' + a; badge.textContent = a === 'best' ? '✓' : a === 'workable' ? '~' : '✗'; }
+
+            const windCell = row.querySelector('td:nth-child(4)');
+            if (windCell) windCell.innerHTML = windHTML(kts, deg);
+
+            const airCell = row.querySelector('td:nth-child(7)');
+            if (airCell) airCell.textContent = tmp + '°C';
+
+            const ratingCell = row.querySelector('td:nth-child(9)');
+            if (ratingCell) ratingCell.textContent = r + '/10';
+        }
+
+        function updateWeeklyForecast(daily) {
+            // Use #weekly-overview-table only — avoids the cond-table row mis-alignment bug
+            const rows = document.querySelectorAll('#weekly-overview-table tbody tr');
+            rows.forEach((row, i) => {
+                if (i >= 7) return;
+                const kts = Math.round((daily.wind_speed_10m_max || [])[i] || 0);
+                const deg = (daily.wind_direction_10m_dominant || [])[i] || 0;
+                const tmp = Math.round((daily.temperature_2m_max || [])[i] || 0);
+                const a   = assess(kts, deg);
+                const r   = rateDay(kts, deg);
+
+                row.className = a + '-day';
+
+                // Day name + date from API (stays correct across weeks)
+                const dateStr = (daily.time || [])[i];
+                if (dateStr) {
+                    const d = new Date(dateStr + 'T12:00:00');
+                    const dayCell = row.querySelector('td:nth-child(1)');
+                    if (dayCell) dayCell.innerHTML = `<strong>${DAY_NAMES[d.getDay()]}</strong>`;
+                    const dateCell = row.querySelector('td:nth-child(2)');
+                    if (dateCell) dateCell.textContent = `${MON_NAMES[d.getMonth()]} ${d.getDate()}`;
+                }
+
+                const badge = row.querySelector('td:nth-child(3) .status-badge');
+                if (badge) { badge.className = 'status-badge ' + a; badge.textContent = a === 'best' ? '✓' : a === 'workable' ? '~' : '✗'; }
+
+                const windCell = row.querySelector('td:nth-child(4)');
+                if (windCell) windCell.innerHTML = windHTML(kts, deg);
+
+                const airCell = row.querySelector('td:nth-child(7)');
+                if (airCell) airCell.textContent = tmp + '°C';
+
+                const ratingCell = row.querySelector('td:nth-child(9)');
+                if (ratingCell) ratingCell.textContent = r + '/10';
+            });
+        }
+
+        const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+        const MON_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+        function buildNotes(kts, deg, a) {
+            const dir = compassDir(deg);
+            const s = Math.round(kts);
+            if (a === 'avoid') {
+                if (kts < WIND_MIN) return `Insufficient wind: ${s} kts is below the ${WIND_MIN} kt minimum needed for kitesurfing. Direction (${Math.round(deg)}° ${dir}) is otherwise safe, but there isn't enough power. Not a kiting day.`;
+                if (kts > WIND_MAX) return `Wind too strong: ${s} kts exceeds the ${WIND_MAX} kt safe maximum. Not a kiting day.`;
+                return `Offshore wind (${Math.round(deg)}° ${dir}): wind blows from land toward sea — dangerous for kitesurfing at Cabourg. Avoid.`;
+            }
+            if (a === 'best') return `Onshore wind (${Math.round(deg)}° ${dir}): wind comes from the sea and pushes riders toward shore — safest direction for Cabourg. ${s} kts — ideal speed.`;
+            return `Sideshore wind (${Math.round(deg)}° ${dir}): wind blows parallel to the beach — safe and workable. ${s} kts.`;
+        }
+
+        function updateDaySections(daily) {
+            document.querySelectorAll('.day-section[data-day-idx]').forEach(section => {
+                const i = parseInt(section.dataset.dayIdx);
+                if (i < 0 || i >= 7) return;
+                const kts = Math.round((daily.wind_speed_10m_max || [])[i] || 0);
+                const deg = (daily.wind_direction_10m_dominant || [])[i] || 0;
+                const tmp = Math.round((daily.temperature_2m_max || [])[i] || 0);
+                const a   = assess(kts, deg);
+                const r   = rateDay(kts, deg);
+
+                section.className = 'day-section ' + a;
+
+                // Day header — derived from API date string (stays correct across weeks)
+                const dateStr = (daily.time || [])[i];
+                if (dateStr) {
+                    const d = new Date(dateStr + 'T12:00:00');
+                    const h2 = section.querySelector('.day-header h2');
+                    if (h2) h2.textContent = `${DAY_NAMES[d.getDay()]}, ${MON_NAMES[d.getMonth()]} ${d.getDate()}`;
+                }
+
+                const badge = section.querySelector('.day-status');
+                if (badge) {
+                    badge.className   = 'day-status ' + a;
+                    badge.textContent = a === 'best' ? '✓' : a === 'workable' ? '~' : '✗';
+                }
+
+                section.querySelectorAll('.details-table tr').forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length < 2) return;
+                    const label = cells[0].textContent.trim();
+                    if (label === 'Wind Speed') {
+                        const s = Math.round(kts);
+                        cells[1].textContent = `${s}–${s + 3} kts`;
+                    } else if (label === 'Wind Direction') {
+                        const rot = (deg + 180) % 360;
+                        cells[1].innerHTML = `<span style="display:inline-block;transform:rotate(${rot}deg);font-size:1.1em;margin-right:4px;">↑</span> ${compassDir(deg)} (${Math.round(deg)}°)`;
+                    } else if (label === 'Air Temperature') {
+                        cells[1].textContent = `${tmp}°C`;
+                    }
+                });
+
+                const ratingEl = section.querySelector('.rating-value');
+                if (ratingEl) {
+                    const lbl = a === 'best' ? 'Best/Safest' : a === 'workable' ? 'Workable' : 'Avoid';
+                    ratingEl.textContent = `${r}/10 – ${lbl}`;
+                }
+
+                const notesEl = section.querySelector('.notes-content');
+                if (notesEl) notesEl.textContent = buildNotes(kts, deg, a);
+            });
+        }
+
+        // ── Tides — Open-Meteo Marine API (free, no key, CORS-enabled) ──────────────
+        // sea_level_height_msl is hourly; local maxima = High tide, minima = Low tide.
+        async function fetchTideData() {
+            try {
+                const url = `https://marine-api.open-meteo.com/v1/marine?latitude=${LAT}&longitude=${LON}` +
+                            `&hourly=sea_level_height_msl&timezone=Europe/Paris&forecast_days=8`;
+                const { hourly } = await (await fetch(url)).json();
+                if (!hourly) return;
+                const times  = hourly.time;
+                const levels = hourly.sea_level_height_msl;
+
+                const todayStr = new Date().toLocaleString('sv-SE', { timeZone: 'Europe/Paris' }).slice(0, 10);
+                const tToday   = Date.parse(todayStr);
+                const days     = Array.from({ length: 7 }, () => ({ high: [], low: [] }));
+
+                for (let i = 1; i < levels.length - 1; i++) {
+                    const p = levels[i-1], c = levels[i], n = levels[i+1];
+                    if (p === null || c === null || n === null) continue;
+                    const isHigh = c > p && c >= n;
+                    const isLow  = c < p && c <= n;
+                    if (!isHigh && !isLow) continue;
+
+                    // Parabolic interpolation: vertex offset in minutes from hourly index i
+                    const denom = n - 2 * c + p;
+                    const offsetMin = denom !== 0 ? -30 * (n - p) / denom : 0;
+                    const exactMs  = Date.parse(times[i]) + offsetMin * 60000;
+                    const exact    = new Date(exactMs);
+                    const hhmm = exact.toLocaleString('sv-SE', { timeZone: 'Europe/Paris' }).slice(11, 16);
+
+                    const dayIdx = Math.round((Date.parse(times[i].slice(0, 10)) - tToday) / 86400000);
+                    if (dayIdx >= 0 && dayIdx < 7)
+                        (isHigh ? days[dayIdx].high : days[dayIdx].low).push(hhmm);
+                }
+
+                const condRow = document.querySelector('#cond-table tbody tr');
+                if (condRow) {
+                    const h = condRow.querySelector('td:nth-child(5)');
+                    const l = condRow.querySelector('td:nth-child(6)');
+                    if (h) h.textContent = days[0].high.join(' / ') || '—';
+                    if (l) l.textContent = days[0].low.join(' / ')  || '—';
+                }
+                document.querySelectorAll('#weekly-overview-table tbody tr').forEach((row, i) => {
+                    if (i >= 7) return;
+                    const h = row.querySelector('td:nth-child(5)');
+                    const l = row.querySelector('td:nth-child(6)');
+                    if (h) h.textContent = days[i].high.join(' / ') || '—';
+                    if (l) l.textContent = days[i].low.join(' / ')  || '—';
+                });
+                // Also update individual day-section cards so they match the tables
+                document.querySelectorAll('.day-section[data-day-idx]').forEach(section => {
+                    const i = parseInt(section.dataset.dayIdx);
+                    if (i < 0 || i >= 7) return;
+                    section.querySelectorAll('.details-table tr').forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        if (cells.length < 2) return;
+                        const label = cells[0].textContent.trim();
+                        if (label === 'High Tide') cells[1].textContent = days[i].high.join(' / ') || '—';
+                        if (label === 'Low Tide')  cells[1].textContent = days[i].low.join(' / ')  || '—';
+                    });
+                });
+            } catch (e) { console.warn('Tide API error:', e); }
+        }
+
+        // ── Weekly table row → scroll to day section ────────────────────────────
+        document.querySelectorAll('#weekly-overview-table tbody tr').forEach((row, i) => {
+            row.dataset.dayIdx = i;
+            row.addEventListener('click', () => {
+                const target = document.getElementById('day-' + i);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // ── Boot ──────────────────────────────────────────────────────────────────
+        let lastFetch = 0;
+        const _fetchWeatherData = fetchWeatherData;
+        fetchWeatherData = async function() { lastFetch = Date.now(); await _fetchWeatherData(); };
+
+        updateTimestamps();
+        fetchWeatherData();
+        setInterval(updateTimestamps, 60000);
+        setInterval(fetchWeatherData, 300000);
+
+        // Re-fetch immediately when the tab becomes visible again after being hidden/sleeping
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible' && Date.now() - lastFetch > 300000) {
+                fetchWeatherData();
+            }
+        });
+    </script>
+</body>
+</html>
